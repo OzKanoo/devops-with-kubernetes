@@ -1,18 +1,21 @@
 ﻿const http = require('http');
-let counter = 0;
-const port = process.env.PORT || 3000;
+const fs = require('fs');
+const path = require('path');
+const filePath = path.join(__dirname, 'files', 'pong.txt');
 
-const server = http.createServer((req, res) => {
+let counter = 0;
+// Falls die Datei schon existiert (nach Neustart), Zähler laden
+if (fs.existsSync(filePath)) {
+  counter = parseInt(fs.readFileSync(filePath, 'utf8')) || 0;
+}
+
+http.createServer((req, res) => {
   if (req.url === '/pingpong') {
-    res.statusCode = 200;
-    res.end('pong ' + counter);
     counter++;
+    fs.writeFileSync(filePath, counter.toString()); // In Datei speichern
+    res.end('pong ' + (counter - 1));
   } else {
     res.statusCode = 404;
-    res.end('Not Found');
+    res.end();
   }
-});
-
-server.listen(port, () => {
-  console.log('Ping-Pong server started on port ' + port);
-});
+}).listen(3000);
