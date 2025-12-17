@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: oezkan00/ping-pong:v2.0
-          ports:
-            - containerPort: 3000
+          image: oezkan00/ping-pong:v3.0
+          env:
+            - name: DATABASE_URL
+              value: "postgres://postgres:pongs123@postgres-svc:5432/pong_db"
