@@ -15,6 +15,13 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: TODO_APP_IMAGE # Dies ist unser Platzhalter für Kustomize
+          image: TODO_APP_IMAGE
+          resources:
+            requests:
+              cpu: "50m"      # 5% eines Kerns reserviert
+              memory: "64Mi"  # 64 MB RAM reserviert
+            limits:
+              cpu: "200m"     # Maximal 20% eines Kerns
+              memory: "128Mi" # Maximal 128 MB RAM
           ports:
             - containerPort: 3000
