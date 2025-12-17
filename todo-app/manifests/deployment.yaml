@@ -13,8 +13,18 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: log-pvc
       containers:
         - name: todo-app
-          image: oezkan00/todo-app:v1.0
-          ports:
-            - containerPort: 3000
+          image: oezkan00/todo-app:v2.1
+          env:
+            - name: BACKEND_URL
+              value: "http://todo-backend-svc:80/todos"
+            - name: PORT
+              value: "3000"
+          volumeMounts:
+            - name: storage
+              mountPath: /usr/src/app/files
