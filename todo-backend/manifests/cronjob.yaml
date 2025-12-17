@@ -1,0 +1,15 @@
+﻿apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: wiki-todo-job
+  namespace: project
+spec:
+  schedule: "0 * * * *"  # Jede volle Stunde
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: wiki-job
+            image: oezkan00/todo-job:v1.0
+          restartPolicy: OnFailure
