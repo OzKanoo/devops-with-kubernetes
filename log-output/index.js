@@ -1,21 +1,29 @@
 ﻿const http = require('http');
+const fs = require('fs');
+const path = require('path');
 const crypto = require('crypto');
 
+const filePath = path.join(__dirname, 'files', 'log.txt');
 const randomString = crypto.randomBytes(10).toString('hex');
-const port = process.env.PORT || 3000;
+const mode = process.env.MODE || 'WRITE'; // Wir nutzen eine Umgebungsvariable
 
-const server = http.createServer((req, res) => {
-  const timestamp = new Date().toISOString();
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end(\: \);
-});
-
-server.listen(port, () => {
-  console.log('Server started in port ' + port);
-  
-  // Wir behalten die Konsolen-Ausgabe alle 5 Sekunden bei
+if (mode === 'WRITE') {
+  console.log('Starting in WRITE mode...');
+  // Alle 5 Sekunden Zeitstempel in die Datei schreiben
   setInterval(() => {
-    console.log(\: \);
+    const logLine = \: \\n;
+    fs.appendFileSync(filePath, logLine);
+    console.log('Wrote to file: ' + logLine);
   }, 5000);
-});
+} else {
+  console.log('Starting in READ mode...');
+  // Webserver, der die Datei ausliest
+  http.createServer((req, res) => {
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, 'utf8');
+      res.end(content);
+    } else {
+      res.end('File not found yet...');
+    }
+  }).listen(3000);
+}

@@ -12,8 +12,23 @@ spec:
       labels:
         app: log-output
     spec:
+      volumes:
+        - name: shared-logs
+          emptyDir: {} # Das temporäre gemeinsame Volume
       containers:
-        - name: log-output
-          image: oezkan00/log-output:v1.1
-          ports:
-            - containerPort: 3000
+        - name: writer
+          image: oezkan00/log-output:v1.2
+          env:
+            - name: MODE
+              value: "WRITE"
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/files
+        - name: reader
+          image: oezkan00/log-output:v1.2
+          env:
+            - name: MODE
+              value: "READ"
+          volumeMounts:
+            - name: shared-logs
+              mountPath: /usr/src/app/files
