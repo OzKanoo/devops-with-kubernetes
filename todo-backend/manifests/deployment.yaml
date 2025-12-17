@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: oezkan00/todo-backend:v1.0
-          ports:
-            - containerPort: 3000
+          image: oezkan00/todo-backend:v2.0
+          env:
+            - name: DATABASE_URL
+              value: "postgres://postgres:todo-pass-123@todo-db-svc:5432/todo_db"
