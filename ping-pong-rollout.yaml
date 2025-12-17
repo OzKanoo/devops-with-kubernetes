@@ -1,0 +1,30 @@
+﻿apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: ping-pong-rollout
+  namespace: project
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ping-pong
+  strategy:
+    canary:
+      analysis:
+        templates:
+        - templateName: cpu-usage-check
+      steps:
+      - setWeight: 33
+      - pause: {duration: 2m}
+      - setWeight: 66
+      - pause: {duration: 2m}
+  template:
+    metadata:
+      labels:
+        app: ping-pong
+    spec:
+      containers:
+      - name: ping-pong
+        image: oezkan00/ping-pong:v4.1
+        ports:
+        - containerPort: 3000
