@@ -3,24 +3,21 @@ const { Client } = require('pg');
 const app = express();
 app.use(express.json());
 
+// Einfaches Middleware-Logging für jede Anfrage
+app.use((req, res, next) => {
+  console.log([\] \ request to \);
+  next();
+});
+
 const client = new Client({
-  connectionString: process.env.DATABASE_URL || 'postgres://postgres:todo-pass-123@todo-db-svc:5432/todo_db'
+  connectionString: process.env.DATABASE_URL
 });
 
 const initDb = async () => {
-  let connected = false;
-  while (!connected) {
-    try {
-      await client.connect();
-      connected = true;
-    } catch (e) {
-      console.log('Waiting for DB...');
-      await new Promise(resolve => setTimeout(resolve, 5000));
-    }
-  }
+  await client.connect();
   await client.query('CREATE TABLE IF NOT EXISTS todos (id SERIAL PRIMARY KEY, todo TEXT)');
 };
-initDb();
+initDb().catch(err => console.error(err));
 
 app.get('/todos', async (req, res) => {
   const result = await client.query('SELECT todo FROM todos');
@@ -29,12 +26,17 @@ app.get('/todos', async (req, res) => {
 
 app.post('/todos', async (req, res) => {
   const text = req.body.todo;
+  
+  // Übung 2.10: Validierung auf 140 Zeichen
   if (text && text.length <= 140) {
-    await client.query('INSERT INTO todos (todo) VALUES ()', [text]);
+    await client.query('INSERT INTO todos (todo) VALUES (\)', [text]);
+    console.log(SUCCESS: Added todo: "\");
     res.status(201).send('OK');
   } else {
-    res.status(400).send('Invalid');
+    // Übung 2.10: Fehlermeldung für die Logs
+    console.error(REJECTED: Todo is too long (\ chars). Max 140.);
+    res.status(400).send('Todo too long or missing');
   }
 });
 
-app.listen(3000, () => console.log('Backend on 3000'));
+app.listen(3000, () => console.log('Backend listening on port 3000'));
