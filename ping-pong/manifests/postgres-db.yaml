@@ -2,7 +2,6 @@
 kind: Service
 metadata:
   name: postgres-svc
-  namespace: exercises
 spec:
   type: ClusterIP
   clusterIP: None
@@ -15,7 +14,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres-ss
-  namespace: exercises
 spec:
   serviceName: postgres-svc
   replicas: 1
@@ -35,17 +33,15 @@ spec:
               value: "pongs123"
             - name: POSTGRES_DB
               value: "pong_db"
-          ports:
-            - containerPort: 5432
           volumeMounts:
             - name: pg-data
               mountPath: /var/lib/postgresql/data
+              subPath: postgres  # Wichtig für GKE!
   volumeClaimTemplates:
     - metadata:
         name: pg-data
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
-            storage: 500Mi
+            storage: 1Gi
