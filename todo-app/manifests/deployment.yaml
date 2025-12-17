@@ -2,7 +2,6 @@
 kind: Deployment
 metadata:
   name: todo-app-dep
-  namespace: default
 spec:
   replicas: 1
   selector:
@@ -13,9 +12,13 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: log-pvc
       containers:
         - name: todo-app
-          image: oezkan00/todo-app:v1.1
-          env:
-            - name: PORT
-              value: "3000"
+          image: oezkan00/todo-app:v1.3
+          volumeMounts:
+            - name: storage
+              mountPath: /usr/src/app/files
