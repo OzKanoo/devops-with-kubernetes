@@ -2,7 +2,6 @@
 kind: Deployment
 metadata:
   name: log-output-dep
-  namespace: default
 spec:
   replicas: 1
   selector:
@@ -15,8 +14,6 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: oezkan00/log-output:v1.0
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+          image: oezkan00/log-output:v1.1
+          ports:
+            - containerPort: 3000
