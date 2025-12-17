@@ -1,12 +1,12 @@
 ﻿apiVersion: v1
 kind: Service
 metadata:
-  name: todo-app-svc
+  name: todo-backend-svc
   namespace: project
 spec:
   type: ClusterIP
   selector:
-    app: todo-app
+    app: todo-backend
   ports:
     - port: 80
       protocol: TCP
