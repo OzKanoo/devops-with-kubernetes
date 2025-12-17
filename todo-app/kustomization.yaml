@@ -1,0 +1,13 @@
+﻿apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Welche Dateien sollen zusammengefasst werden?
+resources:
+  - manifests/deployment.yaml
+  - manifests/service.yaml
+
+# Hier definieren wir, was den Platzhalter ersetzen soll
+images:
+  - name: TODO_APP_IMAGE
+    newName: oezkan00/todo-app
+    newTag: v2.1
