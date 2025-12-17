@@ -18,7 +18,7 @@ spec:
             claimName: log-pvc
       containers:
         - name: todo-app
-          image: oezkan00/todo-app:v1.3
+          image: oezkan00/todo-app:v1.4
           volumeMounts:
             - name: storage
               mountPath: /usr/src/app/files
