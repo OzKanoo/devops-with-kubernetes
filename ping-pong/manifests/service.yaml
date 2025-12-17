@@ -1,12 +1,12 @@
 ﻿apiVersion: v1
 kind: Service
 metadata:
-  name: log-output-svc
+  name: ping-pong-svc
   namespace: exercises
 spec:
   type: ClusterIP
   selector:
-    app: log-output
+    app: ping-pong
   ports:
     - port: 80
       protocol: TCP
