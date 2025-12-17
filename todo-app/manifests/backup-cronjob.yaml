@@ -1,0 +1,30 @@
+﻿apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: todo-backup-job
+  namespace: project
+spec:
+  schedule: "0 0 * * *" # Täglich um Mitternacht
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-container
+            image: google/cloud-sdk:alpine
+            env:
+            - name: PG_URL
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-pw
+                  key: POSTGRES_URL
+            - name: BUCKET
+              value: "gs://todo-backup-ozkan-123"
+            command:
+            - /bin/bash
+            - -c
+            - |
+              apk add postgresql-client
+              pg_dump \ > backup.sql
+              gsutil cp backup.sql \/backup-\.sql
+          restartPolicy: OnFailure
