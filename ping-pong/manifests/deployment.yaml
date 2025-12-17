@@ -1,19 +1,19 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output-dep
+  name: ping-pong-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log-output
+      app: ping-pong
   template:
     metadata:
       labels:
-        app: log-output
+        app: ping-pong
     spec:
       containers:
-        - name: log-output
-          image: oezkan00/log-output:v2.0
+        - name: ping-pong
+          image: oezkan00/ping-pong:v2.0
           ports:
             - containerPort: 3000
