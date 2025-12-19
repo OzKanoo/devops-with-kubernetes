@@ -1,7 +1,7 @@
 name: Delete Environment
 on: delete
 jobs:
-  delete-env:
+  delete:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deleting namespace"

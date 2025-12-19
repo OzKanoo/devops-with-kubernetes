@@ -3,11 +3,9 @@ kind: Deployment
 metadata:
   name: broadcaster
 spec:
+  replicas: 6
   template:
     spec:
       containers:
       - name: broadcaster
         image: oezkan00/broadcaster:latest
-        env:
-        - name: NATS_URL
-          value: "nats://my-nats:4222"

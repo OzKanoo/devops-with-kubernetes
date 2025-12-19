@@ -7,13 +7,13 @@ spec:
   initContainers:
   - name: init-wiki
     image: curlimages/curl
-    command: ["/bin/sh", "-c", "curl https://en.wikipedia.org/wiki/Kubernetes > /usr/share/nginx/html/index.html"]
-    volumeMounts: [{name: html, mountPath: /usr/share/nginx/html}]
+    args: ["-o", "/data/index.html", "https://en.wikipedia.org/wiki/Kubernetes"]
+    volumeMounts: [{name: html, mountPath: /data}]
   containers:
   - name: nginx
     image: nginx
     volumeMounts: [{name: html, mountPath: /usr/share/nginx/html}]
   - name: sidecar
     image: curlimages/curl
-    command: ["/bin/sh", "-c", "while true; do sleep 900; curl https://en.wikipedia.org/wiki/Special:Random > /usr/share/nginx/html/index.html; done"]
-    volumeMounts: [{name: html, mountPath: /usr/share/nginx/html}]
+    command: ["sh", "-c", "while true; do sleep 600; curl -L https://en.wikipedia.org/wiki/Special:Random -o /data/index.html; done"]
+    volumeMounts: [{name: html, mountPath: /data}]
