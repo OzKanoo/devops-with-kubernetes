@@ -9,3 +9,6 @@ spec:
       containers:
       - name: broadcaster
         image: oezkan00/broadcaster:latest
+        env:
+        - name: NATS_QUEUE_GROUP
+          value: "broadcaster-group"

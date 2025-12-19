@@ -3,17 +3,18 @@ kind: Pod
 metadata:
   name: wikipedia-server
 spec:
-  volumes: [{name: html, emptyDir: {}}]
+  volumes: [{name: html-vol, emptyDir: {}}]
   initContainers:
   - name: init-wiki
     image: curlimages/curl
     args: ["-o", "/data/index.html", "https://en.wikipedia.org/wiki/Kubernetes"]
-    volumeMounts: [{name: html, mountPath: /data}]
+    volumeMounts: [{name: html-vol, mountPath: /data}]
   containers:
   - name: nginx
     image: nginx
-    volumeMounts: [{name: html, mountPath: /usr/share/nginx/html}]
-  - name: sidecar
+    volumeMounts: [{name: html-vol, mountPath: /usr/share/nginx/html}]
+  - name: sidecar-updater
     image: curlimages/curl
-    command: ["sh", "-c", "while true; do sleep 600; curl -L https://en.wikipedia.org/wiki/Special:Random -o /data/index.html; done"]
-    volumeMounts: [{name: html, mountPath: /data}]
+    command: ["sh", "-c"]
+    args: ["while true; do sleep $(( (RANDOM % 601) + 300 )); curl -L https://en.wikipedia.org/wiki/Special:Random -o /data/index.html; done"]
+    volumeMounts: [{name: html-vol, mountPath: /data}]

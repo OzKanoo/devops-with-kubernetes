@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-dep
+spec:
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+      - name: app
+        image: oezkan00/app:latest
