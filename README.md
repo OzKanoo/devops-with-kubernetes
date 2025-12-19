@@ -1,17 +1,15 @@
 # DevOps with Kubernetes - Submission oezkan00
 
 ## Exercise Release Links
-* Part 1: [1.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.1) | [1.2](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.2) | [1.7](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.7) | [1.11](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.11)
-* Part 3: [3.6](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.6) | [3.8](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.8) | [3.9](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.9) | [3.10](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.10)
-* Part 4: [4.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.1) | [4.4](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.4) | [4.6](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.6)
-* Part 5: [5.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.1) | [5.4](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.4) | [5.7](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.7)
+### Part 1
+[1.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.1) | [1.2](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.2) | [1.3](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.3) | [1.4](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.4) | [1.5](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.5) | [1.6](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.6) | [1.7](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.7) | [1.8](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.8) | [1.9](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.9) | [1.10](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.10) | [1.11](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.11) | [1.12](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.12) | [1.13](https://github.com/OzKanoo/devops-with-kubernetes/tree/1.13)
+
+### Part 2 & 3
+[2.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/2.1) | [2.2](https://github.com/OzKanoo/devops-with-kubernetes/tree/2.2) | [3.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.1) | [3.2](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.2) | [3.3](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.3) | [3.4](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.4) | [3.5](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.5) | [3.6](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.6) | [3.7](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.7) | [3.8](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.8) | [3.9](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.9) | [3.10](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.10) | [3.11](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.11) | [3.12](https://github.com/OzKanoo/devops-with-kubernetes/tree/3.12)
+
+### Part 4 & 5
+[4.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.1) | [4.2](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.2) | [4.3](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.3) | [4.4](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.4) | [4.5](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.5) | [4.6](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.6) | [4.7](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.7) | [4.8](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.8) | [4.9](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.9) | [4.10](https://github.com/OzKanoo/devops-with-kubernetes/tree/4.10) | [5.1](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.1) | [5.2](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.2) | [5.3](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.3) | [5.4](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.4) | [5.6](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.6) | [5.7](https://github.com/OzKanoo/devops-with-kubernetes/tree/5.7)
 
 ## Exercise 3.9: DBaaS vs DIY
-A comparison of managed database services (DBaaS) versus hosting your own database in a container (DIY)[cite: 78]:
-
-- **DBaaS (e.g., Google Cloud SQL):**
-  - **Pros:** Automated backups, high availability, and significantly less maintenance work[cite: 79, 80].
-  - **Cons:** Higher monthly costs[cite: 79].
-- **DIY (Postgres in a Container):**
-  - **Pros:** Full control over configuration and lower costs using cluster resources[cite: 78, 79].
-  - **Cons:** Requires manual setup for backups (see exercise 3.10) and more maintenance effort[cite: 80, 83].
+- **Managed Database (DBaaS):** Pros include automated backups [cite: 80], high availability, and minimal maintenance[cite: 79]. The main con is the higher cost compared to self-hosted solutions[cite: 79].
+- **Self-hosted Database (DIY):** Pros are full control over configuration and lower costs[cite: 79]. Cons include the need for manual setup of backup systems (see exercise 3.10) and significant maintenance effort[cite: 79, 83].

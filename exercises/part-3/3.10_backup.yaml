@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: db-backup
+  name: todo-backup
 spec:
   schedule: "0 0 * * *"
   jobTemplate:
