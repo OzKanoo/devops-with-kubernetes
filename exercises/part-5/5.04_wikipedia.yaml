@@ -2,32 +2,18 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: wikipedia-server
-  labels:
-    app: wikipedia
 spec:
-  volumes:
-  - name: shared-html
-    emptyDir: {}
+  volumes: [{name: html, emptyDir: {}}]
   initContainers:
-  - name: init-content
+  - name: init-wiki
     image: curlimages/curl
-    command: ["/bin/sh", "-c"]
-    args: ["curl https://en.wikipedia.org/wiki/Kubernetes > /usr/share/nginx/html/index.html"]
-    volumeMounts:
-    - name: shared-html
-      mountPath: /usr/share/nginx/html
+    command: ["/bin/sh", "-c", "curl https://en.wikipedia.org/wiki/Kubernetes > /usr/share/nginx/html/index.html"]
+    volumeMounts: [{name: html, mountPath: /usr/share/nginx/html}]
   containers:
   - name: nginx
     image: nginx
-    ports:
-      - containerPort: 80
-    volumeMounts:
-    - name: shared-html
-      mountPath: /usr/share/nginx/html
-  - name: sidecar-updater
+    volumeMounts: [{name: html, mountPath: /usr/share/nginx/html}]
+  - name: sidecar
     image: curlimages/curl
-    command: ["/bin/sh", "-c"]
-    args: ["while true; do sleep 900; curl https://en.wikipedia.org/wiki/Special:Random > /usr/share/nginx/html/index.html; done"]
-    volumeMounts:
-    - name: shared-html
-      mountPath: /usr/share/nginx/html
+    command: ["/bin/sh", "-c", "while true; do sleep 900; curl https://en.wikipedia.org/wiki/Special:Random > /usr/share/nginx/html/index.html; done"]
+    volumeMounts: [{name: html, mountPath: /usr/share/nginx/html}]
