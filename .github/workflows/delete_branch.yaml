@@ -4,4 +4,4 @@ jobs:
   delete:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deleting namespace"
+      - run: echo "Deleting namespace for branch ${{ github.event.ref }}"

@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: db-backup-gcs
+  name: db-backup
 spec:
   schedule: "0 0 * * *"
   jobTemplate:
@@ -11,4 +11,4 @@ spec:
           containers:
           - name: backup
             image: google/cloud-sdk:slim
-            command: ["sh", "-c", "pg_dump $URL | gsutil cp - gs://bucket/backup.sql"]
+            command: ["sh", "-c", "pg_dump $URL | gsutil cp - gs://your-bucket-name/backup.sql"]
